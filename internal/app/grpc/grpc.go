@@ -22,7 +22,6 @@ func New(
 	log *slog.Logger,
 	port int,
 ) *Server {
-
 	server := NewUserServer(log)
 	s := grpc.NewServer()
 	reflection.Register(s)
