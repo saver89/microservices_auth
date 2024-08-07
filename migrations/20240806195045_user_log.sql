@@ -3,7 +3,7 @@ create table if not exists user_logs (
     id bigserial,
     user_id bigint not null,
     log varchar not null,
-    created_at timestamp not null default now(),
+    created_at timestamp not null default now()
 );
 
 -- +goose Down
