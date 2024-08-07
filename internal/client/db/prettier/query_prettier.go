@@ -7,10 +7,13 @@ import (
 )
 
 const (
-	PlaceholderDollar   = "$"
+	// PlaceholderDollar is a placeholder for PostgreSQL
+	PlaceholderDollar = "$"
+	// PlaceholderQuestion is a placeholder for MySQL
 	PlaceholderQuestion = "?"
 )
 
+// Pretty replaces placeholders in the query with the values of the arguments
 func Pretty(query string, placeholder string, args ...any) string {
 	for i, param := range args {
 		var value string

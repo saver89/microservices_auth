@@ -14,7 +14,7 @@ func (s *serv) Update(ctx context.Context, id int64, req model.UserInfo) error {
 		}
 
 		_, errTx = s.userLogRepository.Create(ctx, model.UserLogInfo{
-			UserId: id,
+			UserID: id,
 			Log:    updateLog,
 		})
 		if errTx != nil {

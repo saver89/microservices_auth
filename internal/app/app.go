@@ -31,6 +31,7 @@ func New(ctx context.Context) (*App, error) {
 	return &app, nil
 }
 
+// Run runs the application
 func (a *App) Run() error {
 	defer func() {
 		closer.CloseAll()

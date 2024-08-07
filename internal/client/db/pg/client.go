@@ -12,6 +12,7 @@ type pgClient struct {
 	masterDBC db.DB
 }
 
+// New creates a new pg client
 func New(ctx context.Context, dsn string) (db.Client, error) {
 	dbc, err := pgxpool.Connect(ctx, dsn)
 	if err != nil {
@@ -23,10 +24,12 @@ func New(ctx context.Context, dsn string) (db.Client, error) {
 	}, nil
 }
 
+// DB returns the database
 func (p pgClient) DB() db.DB {
 	return p.masterDBC
 }
 
+// Close closes the client
 func (p pgClient) Close() error {
 	if p.masterDBC == nil {
 		p.masterDBC.Close()

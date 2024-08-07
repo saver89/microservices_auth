@@ -13,7 +13,7 @@ const (
 	tableName = "user_logs"
 
 	idColumn        = "id"
-	userIdColumn    = "user_id"
+	userIDColumn    = "user_id"
 	logColumn       = "log"
 	createdAtColumn = "created_at"
 )
@@ -22,17 +22,19 @@ type repo struct {
 	db db.Client
 }
 
+// NewUserLogRepository creates a new user log repository
 func NewUserLogRepository(db db.Client) repository.UserLogRepository {
 	return &repo{
 		db: db,
 	}
 }
 
+// Create creates a new user log
 func (r *repo) Create(ctx context.Context, log model.UserLogInfo) (int64, error) {
 	builder := sq.Insert(tableName).
 		PlaceholderFormat(sq.Dollar).
-		Columns(userIdColumn, logColumn).
-		Values(log.UserId, log.Log).
+		Columns(userIDColumn, logColumn).
+		Values(log.UserID, log.Log).
 		Suffix("RETURNING id")
 
 	query, args, err := builder.ToSql()

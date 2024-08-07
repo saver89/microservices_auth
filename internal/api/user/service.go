@@ -7,6 +7,7 @@ import (
 	desc "github.com/saver89/microservices_proto/pkg/user/v1"
 )
 
+// Implementation is the user implementation
 type Implementation struct {
 	desc.UnimplementedUserV1Server
 
@@ -14,6 +15,7 @@ type Implementation struct {
 	userService service.UserService
 }
 
+// NewImplementation creates a new user implementation
 func NewImplementation(log *slog.Logger, userService service.UserService) *Implementation {
 	return &Implementation{
 		log:         log,

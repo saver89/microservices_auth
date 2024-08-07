@@ -18,6 +18,7 @@ type serv struct {
 	txManager         db.TxManager
 }
 
+// NewUserService creates a new user service
 func NewUserService(
 	userRepository repository.UserRepository,
 	userLogRepository repository.UserLogRepository,

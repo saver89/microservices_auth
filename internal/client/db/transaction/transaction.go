@@ -13,6 +13,7 @@ type manager struct {
 	db db.Transactor
 }
 
+// NewTransactionManager creates a new transaction manager
 func NewTransactionManager(db db.Transactor) db.TxManager {
 	return &manager{
 		db: db,
@@ -20,12 +21,12 @@ func NewTransactionManager(db db.Transactor) db.TxManager {
 }
 
 func (m manager) transaction(ctx context.Context, opts pgx.TxOptions, fn db.Handler) (err error) {
-	tx, ok := ctx.Value(pg.TxKey).(pgx.Tx)
+	_, ok := ctx.Value(pg.TxKey).(pgx.Tx)
 	if ok {
-		fn(ctx)
+		return fn(ctx)
 	}
 
-	tx, err = m.db.BeginTx(ctx, opts)
+	tx, err := m.db.BeginTx(ctx, opts)
 	if err != nil {
 		return errors.Wrap(err, "failed to begin transaction")
 	}
@@ -60,6 +61,8 @@ func (m manager) transaction(ctx context.Context, opts pgx.TxOptions, fn db.Hand
 	return err
 }
 
+// ReadCommitted executes the handler in a transaction with ReadCommitted isolation level
 func (m *manager) ReadCommitted(ctx context.Context, handler db.Handler) error {
-	return nil
+	txOpts := pgx.TxOptions{IsoLevel: pgx.ReadCommitted}
+	return m.transaction(ctx, txOpts, handler)
 }

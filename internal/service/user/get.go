@@ -16,7 +16,7 @@ func (s *serv) Get(ctx context.Context, id int64) (*model.User, error) {
 		}
 
 		_, errTx = s.userLogRepository.Create(ctx, model.UserLogInfo{
-			UserId: id,
+			UserID: id,
 			Log:    updateLog,
 		})
 		if errTx != nil {
