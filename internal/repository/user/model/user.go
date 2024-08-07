@@ -15,7 +15,7 @@ type UserInfo struct {
 // User is the user model
 type User struct {
 	ID        int64        `db:"id"`
-	Info      UserInfo     `db:"info"`
+	Info      UserInfo     `db:""`
 	CreatedAt time.Time    `db:"created_at"`
 	UpdatedAt sql.NullTime `db:"updated_at"`
 }

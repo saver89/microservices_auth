@@ -14,13 +14,13 @@ import (
 const (
 	tableName = "users"
 
-	idColumn         = "id"
-	emailColumn      = "email"
-	roleColumn       = "role"
-	nameColumn       = "name"
-	passwordColumn   = "password_hash"
-	insertedAtColumn = "inserted_at"
-	updatedAtColumn  = "updated_at"
+	idColumn        = "id"
+	emailColumn     = "email"
+	roleColumn      = "role"
+	nameColumn      = "name"
+	passwordColumn  = "password_hash"
+	createdAtColumn = "created_at"
+	updatedAtColumn = "updated_at"
 )
 
 type repo struct {
@@ -61,7 +61,7 @@ func (r *repo) Create(ctx context.Context, user model.CreateUserRequest) (int64,
 }
 
 func (r *repo) Get(ctx context.Context, id int64) (*model.User, error) {
-	builder := sq.Select(idColumn, emailColumn, roleColumn, nameColumn, insertedAtColumn, updatedAtColumn).
+	builder := sq.Select(idColumn, emailColumn, roleColumn, nameColumn, createdAtColumn, updatedAtColumn).
 		PlaceholderFormat(sq.Dollar).
 		From(tableName).
 		Where(sq.Eq{idColumn: id}).
@@ -78,7 +78,7 @@ func (r *repo) Get(ctx context.Context, id int64) (*model.User, error) {
 	}
 
 	var user modelRepo.User
-	err = r.db.DB().ScanOneContext(ctx, user, q, args...)
+	err = r.db.DB().ScanOneContext(ctx, &user, q, args...)
 	if err != nil {
 		return nil, err
 	}

@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+const (
+	// RoleAdmin is the admin role
+	RoleAdmin = "admin"
+	// RoleUser is the user role
+	RoleUser = "user"
+)
+
 // UserInfo is the user info model
 type UserInfo struct {
 	Name  string
