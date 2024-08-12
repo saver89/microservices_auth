@@ -2,3 +2,6 @@
 .idea
 /bin/
 vendor
+.env
+.vscode/settings.json
+.vscode/launch.json
