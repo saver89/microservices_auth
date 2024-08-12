@@ -1,8 +1,8 @@
 -- +goose Up
 create table if not exists user_logs (
-    id bigserial,
+    id bigserial primary key,
     user_id bigint not null,
-    log varchar not null,
+    log text not null,
     created_at timestamp not null default now()
 );
 

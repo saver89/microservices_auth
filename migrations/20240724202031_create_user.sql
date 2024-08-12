@@ -1,10 +1,10 @@
 -- +goose Up
 create table if not exists users (
-    id bigserial,
-    name varchar not null,
-    email varchar not null,
-    role varchar not null,
-    password_hash varchar,
+    id bigserial primary key,
+    name text not null,
+    email text not null,
+    role text not null,
+    password_hash text,
     created_at timestamp not null default now(),
     updated_at timestamp not null default now()
 );
